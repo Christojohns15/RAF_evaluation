@@ -66,6 +66,7 @@ define(['N/https', 'N/log', 'N/record', 'N/runtime', 'N/search', 'N/url'],
         function fieldChanged(scriptContext) {
             let currentRecord = scriptContext.currentRecord;
             let language = currentRecord.getValue('custpage_jj_languagecourse');
+            let tranCurrency = currentRecord.getText('custrecord_jj_trancurrency');
             currentRecord.setValue({
                 fieldId: 'custpage_trannoo',
                 value: 'Hello'
@@ -77,10 +78,10 @@ define(['N/https', 'N/log', 'N/record', 'N/runtime', 'N/search', 'N/url'],
             })
             let langresult = langsearch.run().getRange({ start: 0, end: 2 });
             {
-                let lang = langresult[i].getValue('name');
-                let fee = langresult[i].getValue('custrecord_jj_feeamount');
+                let lang = langresult.getValue('name');
+                let fee = langresult.getValue('custrecord_jj_feeamount');
                 if (lang == language) {
-                    studenrec.setValue({
+                    currentRecord.setValue({
                         fieldId: 'custpage_jj_feeamount',
                         value: fee
                     });
@@ -90,7 +91,7 @@ define(['N/https', 'N/log', 'N/record', 'N/runtime', 'N/search', 'N/url'],
                 scriptId: 'customscript_jj_q3_raf',
                 deploymentId: 'customdeploy_jj_q3_raf',
                 params: {
-                    'customer': language
+                    'transactionCurrency':tranCurrency
                 }
             });
             console.log(language);

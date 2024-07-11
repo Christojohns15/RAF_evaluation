@@ -105,6 +105,26 @@ define(['N/https', 'N/record', 'N/search', 'N/ui/serverWidget', 'N/url'],
                         type: serverWidget.FieldType.SELECT,
                         label: 'Transaction Currency',
                     });
+                    trans.addSelectOption({
+                        value: ' ',
+                        text: ' '
+                    });
+                    trans.addSelectOption({
+                        value: '1',
+                        text: 'USD'
+                    });
+                    trans.addSelectOption({
+                        value: '2',
+                        text: 'AUD'
+                    });
+                    trans.addSelectOption({
+                        value: '3',
+                        text: 'CAD'
+                    });
+                    trans.addSelectOption({
+                        value: '3',
+                        text: 'EUR'
+                    });
                     let fee = form.addField({
                         id: 'custpage_feeamount',
                         type: serverWidget.FieldType.CURRENCY,
@@ -134,7 +154,7 @@ define(['N/https', 'N/record', 'N/search', 'N/ui/serverWidget', 'N/url'],
                     let email = request.parameters.custpage_emailll;
                     let languagee = request.parameters.custpage_jj_languagecourse;
                     let baseCurrency = request.parameters.custpage_currency;
-                    let transactionCurrency = request.parameters.custpage_transactioncurrency;
+                    //let transactionCurrency = request.parameters.custpage_transactioncurrency;
                     let fee = request.parameters.custpage_feeamount;
                     let exchangeRate = request.parameters.custpage_xchangerate;
                     let transactionNumber = request.parameters.custpage_trannoo;
@@ -142,8 +162,8 @@ define(['N/https', 'N/record', 'N/search', 'N/ui/serverWidget', 'N/url'],
                         type: 'customrecord_jj_studentrec',
                         isDynamic: true
                     });
-                    let customerr = request.parameters.customer;
-                    log.debug(customerr);
+                    let transactionCurrency = request.parameters.transactionCurrency;
+                    log.debug(transactionCurrency);
                     fetch('https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_wIEyVln5tqoBdgokB6U0Qcx3fSv0DEIbwo394Q2L')
                         .then(response => {
                             if (!response.ok) {
@@ -158,8 +178,9 @@ define(['N/https', 'N/record', 'N/search', 'N/ui/serverWidget', 'N/url'],
                     }).then(response => {
                         console.log(response);
                     });
-
                     let exchangeAmount = exchangeRate * fee
+
+
 
                     customerRecord.setValue({
                         fieldId: 'name',
@@ -224,7 +245,7 @@ define(['N/https', 'N/record', 'N/search', 'N/ui/serverWidget', 'N/url'],
                     '<p>TransactionCurrency: ' + transactionCurrency + '</p>' +
                     '<p>FeeAmount: ' + fee + '</p>' +
                     '<p>ExchangeRate: ' + exchangeRate + '</p>' +
-                    '<p>Transactionno.: ' + customerr + '</p>';
+                    '<p>Transactionno.: ' + transactionNumber+ '</p>';
                     scriptContext.response.writePage(form);
                 }
             }
