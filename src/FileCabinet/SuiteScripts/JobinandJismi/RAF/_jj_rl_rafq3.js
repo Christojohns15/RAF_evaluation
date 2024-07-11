@@ -2,6 +2,30 @@
  * @NApiVersion 2.1
  * @NScriptType Restlet
  */
+/**********************************************************************************
+ * RAF EVALUATION
+ *
+ *
+ * ********************************************************************************
+ *
+ * ********************
+ * company name
+ *
+ * Author: Jobin and Jismi IT Services
+ *
+ *
+ * Date Created: 11-July-2024
+ *
+ * Description: This script is for sending parameters to an api and display the pdf link.
+ *
+ *
+ * REVISION HISTORY
+ *
+ * @version 1.0 company name: 03-July-2024: Created the initial build by JJ0353
+ *
+ *
+ *
+ **************/
 define(['N/https', 'N/record', 'N/search', 'N/url'],
     /**
  * @param{https} https
@@ -20,18 +44,17 @@ define(['N/https', 'N/record', 'N/search', 'N/url'],
          */
         const get = (requestParams) => {
             try {
-                var recordId = requestParams.id;
-                var recordLink = url.resolveRecord({
+                let documentno = requestParams.docno;
+                let recordLink = url.resolveRecord({
                     recordType: record.Type.customrecord_jj_studentrec,
-                    recordId: recordId,
+                    custrecord_jj_transactionnumb: documentno,
                     isEditMode: false,
                 });
                 //let body = 'Akshaya Institute student details: <a href="' + recordLink + '">View details</a>';
                 return recordLink;
-
             }
             catch (error) {
-                log.debug("Error");
+                log.debug("Error " + error);
             }
         }
 
@@ -73,6 +96,6 @@ define(['N/https', 'N/record', 'N/search', 'N/url'],
 
         }
 
-        return {get, put, post, delete: doDelete}
+        return { get, put, post, delete: doDelete }
 
     });

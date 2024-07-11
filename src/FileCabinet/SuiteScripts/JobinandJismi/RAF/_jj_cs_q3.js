@@ -3,6 +3,30 @@
  * @NScriptType ClientScript
  * @NModuleScope SameAccount
  */
+/**********************************************************************************
+ * RAF EVALUATION
+ *
+ *
+ * ********************************************************************************
+ *
+ * ********************
+ * company name
+ *
+ * Author: Jobin and Jismi IT Services
+ *
+ *
+ * Date Created: 11-July-2024
+ *
+ * Description: This script is setting the fee of the courses based on the language selected
+ *
+ *
+ * REVISION HISTORY
+ *
+ * @version 1.0 company name: 03-July-2024: Created the initial build by JJ0353
+ *
+ *
+ *
+ **************/
 define(['N/https', 'N/log', 'N/record', 'N/runtime', 'N/search', 'N/url'],
     /**
      * @param{https} https
@@ -40,21 +64,21 @@ define(['N/https', 'N/log', 'N/record', 'N/runtime', 'N/search', 'N/url'],
         //  * @since 2015.2
         //  */
         function fieldChanged(scriptContext) {
-            var currentRecord = scriptContext.currentRecord;
-            var language = currentRecord.getValue('custpage_jj_languagecourse');
+            let currentRecord = scriptContext.currentRecord;
+            let language = currentRecord.getValue('custpage_jj_languagecourse');
             currentRecord.setValue({
                 fieldId: 'custpage_trannoo',
                 value: 'Hello'
             });
-            var langsearch = search.create({
+            let langsearch = search.create({
                 type: search.Type.customrecord_jj_fee_details,
                 filters: ["custrecord_jj_feeamount", "isnotempty", ""],
                 columns: ['name', 'custrecord_jj_feeamount']
             })
-            var langresult = langsearch.run().getRange({ start: 0, end: 2 });
+            let langresult = langsearch.run().getRange({ start: 0, end: 2 });
             {
-                var lang = langresult[i].getValue('name');
-                var fee = langresult[i].getValue('custrecord_jj_feeamount');
+                let lang = langresult[i].getValue('name');
+                let fee = langresult[i].getValue('custrecord_jj_feeamount');
                 if (lang == language) {
                     studenrec.setValue({
                         fieldId: 'custpage_jj_feeamount',

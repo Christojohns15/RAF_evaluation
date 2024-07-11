@@ -2,6 +2,30 @@
  * @NApiVersion 2.1
  * @NScriptType Suitelet
  */
+/**********************************************************************************
+ * RAF EVALUATION
+ *
+ *
+ * ********************************************************************************
+ *
+ * ********************
+ * company name
+ *
+ * Author: Jobin and Jismi IT Services
+ *
+ *
+ * Date Created: 11-July-2024
+ *
+ * Description: This script is for getting the student details from form and to save custom record with detailed fees.
+ *
+ *
+ * REVISION HISTORY
+ *
+ * @version 1.0 company name: 03-July-2024: Created the initial build by JJ0353
+ *
+ *
+ *
+ **************/
 define(['N/https', 'N/record', 'N/search', 'N/ui/serverWidget', 'N/url'],
     /**
  * @param{https} https
@@ -21,36 +45,36 @@ define(['N/https', 'N/record', 'N/search', 'N/ui/serverWidget', 'N/url'],
         const onRequest = (scriptContext) => {
             try {
                 if (scriptContext.request.method === 'GET') {
-                    var form = serverWidget.createForm({
+                    let form = serverWidget.createForm({
                         title: 'Akshaya Institute Enquiery Form'
                     });
                     form.clientScriptFieldId = 4068;
-                    var namee = form.addField({
+                    let namee = form.addField({
                         id: 'custpage_nameee',
                         type: serverWidget.FieldType.TEXT,
                         label: 'Name',
                     });
-                    var countryy = form.addField({
+                    let countryy = form.addField({
                         id: 'custpage_country',
                         type: serverWidget.FieldType.TEXT,
                         label: 'Country',
                     });
-                    var age = form.addField({
+                    let age = form.addField({
                         id: 'custpage_datee',
                         type: serverWidget.FieldType.INTEGER,
                         label: 'Age',
                     });
-                    var phoneno = form.addField({
+                    let phoneno = form.addField({
                         id: 'custpage_pphone',
                         type: serverWidget.FieldType.PHONE,
                         label: 'Phone Number',
                     });
-                    var emailid = form.addField({
+                    let emailid = form.addField({
                         id: 'custpage_emailll',
                         type: serverWidget.FieldType.EMAIL,
                         label: 'Email',
                     });
-                    var language = form.addField({
+                    let language = form.addField({
                         id: 'custpage_jj_languagecourse',
                         type: serverWidget.FieldType.SELECT,
                         label: 'Language Course'
@@ -71,27 +95,27 @@ define(['N/https', 'N/record', 'N/search', 'N/ui/serverWidget', 'N/url'],
                         value: '3',
                         text: 'German'
                     });
-                    var base = form.addField({
+                    let base = form.addField({
                         id: 'custpage_currency',
                         type: serverWidget.FieldType.CURRENCY,
                         label: 'Base Currency(in Rupees)',
                     });
-                    var trans = form.addField({
+                    let trans = form.addField({
                         id: 'custpage_transactioncurrency',
                         type: serverWidget.FieldType.SELECT,
                         label: 'Transaction Currency',
                     });
-                    var fee = form.addField({
+                    let fee = form.addField({
                         id: 'custpage_feeamount',
                         type: serverWidget.FieldType.CURRENCY,
                         label: 'Fee Amount',
                     });
-                    var xchange = form.addField({
+                    let xchange = form.addField({
                         id: 'custpage_xchangerate',
                         type: serverWidget.FieldType.INTEGER,
                         label: 'Exchange rate',
                     });
-                    var Transaction = form.addField({
+                    let Transaction = form.addField({
                         id: 'custpage_trannoo',
                         type: serverWidget.FieldType.TEXT,
                         label: 'Transaction Number',
@@ -102,19 +126,19 @@ define(['N/https', 'N/record', 'N/search', 'N/ui/serverWidget', 'N/url'],
                     scriptContext.response.writePage(form);
                 }
                 else if (scriptContext.request.method === 'POST') {
-                    var request = scriptContext.request;
-                    var name = request.parameters.custpage_nameee;
-                    var country = request.parameters.custpage_country;
-                    var age = request.parameters.custpage_datee;
-                    var phone = request.parameters.custpage_pphone;
-                    var email = request.parameters.custpage_emailll;
-                    var languagee = request.parameters.custpage_jj_languagecourse;
-                    var baseCurrency = request.parameters.custpage_currency;
-                    var transactionCurrency = request.parameters.custpage_transactioncurrency;
-                    var fee = request.parameters.custpage_feeamount;
-                    var exchangeRate = request.parameters.custpage_xchangerate;
-                    var transactionNumber = request.parameters.custpage_trannoo;
-                    var customerRecord = record.create({
+                    let request = scriptContext.request;
+                    let name = request.parameters.custpage_nameee;
+                    let country = request.parameters.custpage_country;
+                    let age = request.parameters.custpage_datee;
+                    let phone = request.parameters.custpage_pphone;
+                    let email = request.parameters.custpage_emailll;
+                    let languagee = request.parameters.custpage_jj_languagecourse;
+                    let baseCurrency = request.parameters.custpage_currency;
+                    let transactionCurrency = request.parameters.custpage_transactioncurrency;
+                    let fee = request.parameters.custpage_feeamount;
+                    let exchangeRate = request.parameters.custpage_xchangerate;
+                    let transactionNumber = request.parameters.custpage_trannoo;
+                    let customerRecord = record.create({
                         type: 'customrecord_jj_studentrec',
                         isDynamic: true
                     });
@@ -174,8 +198,8 @@ define(['N/https', 'N/record', 'N/search', 'N/ui/serverWidget', 'N/url'],
                         fieldId: 'custpage_trannoo',
                         value: "QR001"
                     });
-                    var customerId = customerRecord.save();
-                    var form = serverWidget.createForm({
+                    let customerId = customerRecord.save();
+                    let form = serverWidget.createForm({
                         title: 'Customer Information Submitted'
                     });
                     form.addField({
