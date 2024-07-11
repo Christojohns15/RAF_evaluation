@@ -144,15 +144,22 @@ define(['N/https', 'N/record', 'N/search', 'N/ui/serverWidget', 'N/url'],
                     });
                     let customerr = request.parameters.customer;
                     log.debug(customerr);
+                    fetch('https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_wIEyVln5tqoBdgokB6U0Qcx3fSv0DEIbwo394Q2L')
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        });
 
-                    let exchangert=freecurrencyapi.latest({
+                    let exchangert = freecurrencyapi.latest({
                         base_currency: 'INR',
                         currencies: transactionCurrency
                     }).then(response => {
                         console.log(response);
                     });
 
-                    let exchangeAmount=exchangeRate*fee
+                    let exchangeAmount = exchangeRate * fee
 
                     customerRecord.setValue({
                         fieldId: 'name',
@@ -180,7 +187,7 @@ define(['N/https', 'N/record', 'N/search', 'N/ui/serverWidget', 'N/url'],
                     });
                     customerRecord.setValue({
                         fieldId: 'custrecord_jj_basecurrency',
-                        value: baseCurrency
+                        value: "INR"
                     });
                     customerRecord.setValue({
                         fieldId: 'custrecord_jj_trancurrency',
