@@ -164,24 +164,20 @@ define(['N/https', 'N/record', 'N/search', 'N/ui/serverWidget', 'N/url'],
                     });
                     let transactionCurrency = request.parameters.transactionCurrency;
                     log.debug(transactionCurrency);
-                    fetch('https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_wIEyVln5tqoBdgokB6U0Qcx3fSv0DEIbwo394Q2L')
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Network response was not ok');
-                            }
-                            return response.json();
-                        });
-
-                    let exchangert = freecurrencyapi.latest({
-                        base_currency: 'INR',
-                        currencies: transactionCurrency
-                    }).then(response => {
-                        console.log(response);
-                    });
-                    let exchangeAmount = exchangeRate * fee
-
-
-
+                    // fetch('https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_wIEyVln5tqoBdgokB6U0Qcx3fSv0DEIbwo394Q2L')
+                    //     .then(response => {
+                    //         if (!response.ok) {
+                    //             throw new Error('Network response was not ok');
+                    //         }
+                    //         return response.json();
+                    //     });
+                    // let exchangert = freecurrencyapi.latest({
+                    //     base_currency: 'INR',
+                    //     currencies: transactionCurrency
+                    // }).then(response => {
+                    //     console.log(response);
+                    // });
+                    // let exchangeAmount = exchangeRate * fee
                     customerRecord.setValue({
                         fieldId: 'name',
                         value: name
@@ -220,7 +216,7 @@ define(['N/https', 'N/record', 'N/search', 'N/ui/serverWidget', 'N/url'],
                     });
                     customerRecord.setValue({
                         fieldId: 'custrecord_jj_exchangerate',
-                        value: exchangeAmount
+                        value: 20//exchangeAmount
                     });
                     customerRecord.setValue({
                         fieldId: 'custpage_trannoo',
@@ -240,7 +236,7 @@ define(['N/https', 'N/record', 'N/search', 'N/ui/serverWidget', 'N/url'],
                     '<p>Age: ' + age + '</p>' +
                     '<p>Phone: ' + phone + '</p>' +
                     '<p>Email: ' + email + '</p>' +
-                    '<p>Language: ' + language + '</p>' +
+                    '<p>Language: ' + languagee + '</p>' +
                     '<p>BaseCurrency: ' + baseCurrency + '</p>' +
                     '<p>TransactionCurrency: ' + transactionCurrency + '</p>' +
                     '<p>FeeAmount: ' + fee + '</p>' +
